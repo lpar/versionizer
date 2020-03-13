@@ -17,12 +17,21 @@ var goPrefix = flag.String("prefix", "meta", "Prefix for Go constant names")
 var ociFile = flag.String("oci", "", "Containerfile/Dockerfile to update")
 var ociStart = flag.String("start", "# Begin metadata", "String marking start of metadata in Containerfile")
 var ociEnd = flag.String("end", "# End metadata", "String marking end of metadata in Containerfile")
+var versFlag = flag.Bool("version", false, "Show version information for this program")
+var verboseFlag = flag.Bool("verbose", false, "Show version information generated when running")
 
 func main() {
 	flag.Parse()
+	if *versFlag {
+		printVersion()
+		os.Exit(0)
+	}
 	var m versionize.Metadata
 	if *manifestFile != "" {
 		m = loadMetadata(*manifestFile)
+	}
+	if *verboseFlag {
+		fmt.Printf("Version %s\n", m.Version)
 	}
 	if *goFile != "" {
 		writeGoCode(*goFile, m)
@@ -30,6 +39,10 @@ func main() {
 	if *ociFile != "" {
 		writeOCI(*ociFile, m)
 	}
+}
+
+func printVersion() {
+	fmt.Printf("%s version %s built %s\n", metaTitle, metaVersion, metaCreated)
 }
 
 func writeOCI(arg string, m versionize.Metadata) {

@@ -1,0 +1,10 @@
+{
+  "Title": "versionize",
+  "Description": "Go utility to fetch version information from a manifest file and Git, for compilation into a Go binary or OCI container.",
+  "Authors": "meta@us.ibm.com",
+  "Vendor": "IBM",
+  "Licenses": "BSD-3-Clause",
+  "Information": "https://github.com/lpar/versionize",
+  "Documentation": "https://github.com/lpar/versionize",
+  "SourceCode": "https://github.com/lpar/versionize"
+}

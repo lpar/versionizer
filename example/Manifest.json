@@ -1,0 +1,10 @@
+{
+  "Title": "My groovy application",
+  "Description": "This is an example metadata file for an application.",
+  "Authors": "user@example.com",
+  "Vendor": "Yoyodyne Propulsion Systems",
+  "Licenses": "GPL-3",
+  "Information": "https://www.example.com/groovyapp",
+  "Documentation": "https://www.example.com/docs",
+  "SourceCode": "https://github.com/yoyodyne/groovy"
+}

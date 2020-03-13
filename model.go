@@ -18,10 +18,12 @@ func MustParseURL(rawurl string) *url.URL {
 	return u
 }
 
+// URI is a wrapper to enable JSON unmarshaling of Go url.URL values
 type URI struct {
 	url.URL
 }
 
+// UnmarshalJSON implements the Unmarshaler interface.
 func (u *URI) UnmarshalJSON(b []byte) error {
 	return u.URL.UnmarshalBinary(bytes.Trim(b, `"`))
 }
@@ -42,6 +44,7 @@ type Metadata struct {
 	SourceCode *URI
 }
 
+// Load reads a JSON manifest into a Metadata struct
 func Load(jsonfile string) (Metadata, error) {
 	m := Metadata{}
 	dat, err := ioutil.ReadFile(jsonfile)

@@ -8,6 +8,7 @@ import (
 )
 
 // Git runs git with the specified arguments, and returns stdout as a string, with whitespace trimmed.
+// If an error occurs, stdout from git is turned into a Go error.
 func Git(arg... string) (string, error) {
 	c := exec.Command("git", arg...)
 	var stdout, stderr bytes.Buffer
@@ -73,6 +74,7 @@ func GitVersion() (string, error) {
 	return ver, nil
 }
 
+// Status reflects the git status of a code tree, indicating whether files have been added, deleted, and so on.
 type Status struct {
 	Added bool
 	Deleted bool
