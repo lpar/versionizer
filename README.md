@@ -4,13 +4,13 @@
 This is a utility for reading metadata from your project's tree using Git, and from a JSON file. That information can
 then be written out into a compilable `.go` file of constants, and/or spliced in to a Containerfile or Dockerfile.
 
-You can specify the package to generate the Go constants in, and a prefix for their names.
+You can specify the package to generate the Go constants in, and a prefix for their names. You will probably want to exclude the generated file from your Git repository using `.gitignore`, otherwise the version information will have a circular dependency on itself!
 
 In a container file, the data is written following the [OCI image specification][oci] standard 
 [predefined annotation keys][keys], and you can specify the substrings to look for when updating the file.
 
 See the `example/` directory for an example manifest file and container file. For an example of the Go output, 
-see `cmd/versionize/metadata.go`.
+see `example/metadata.go.txt` (renamed so as not to break compiles).
 
 See `magefile.go` for an example of using this program with [Mage][mage].
 
