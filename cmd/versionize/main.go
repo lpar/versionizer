@@ -19,9 +19,14 @@ var ociStart = flag.String("start", "# Begin metadata", "String marking start of
 var ociEnd = flag.String("end", "# End metadata", "String marking end of metadata in Containerfile")
 var versFlag = flag.Bool("version", false, "Show version information for this program")
 var verboseFlag = flag.Bool("verbose", false, "Show version information generated when running")
+var initFlag = flag.Bool("init", false, "Write a sample Manifest.json to standard output then exit")
 
 func main() {
 	flag.Parse()
+	if *initFlag {
+		printSample()
+		os.Exit(0)
+	}
 	if *versFlag {
 		printVersion()
 		os.Exit(0)
@@ -59,6 +64,19 @@ func writeGoCode(arg string, m versionize.Metadata) {
 		fmt.Fprintf(os.Stderr, "can't load metadata: %v\n", err)
 		os.Exit(2)
 	}
+}
+
+func printSample() {
+	fmt.Println(`{
+  "Title": "MyApp",
+  "Description": "If you can read this I forgot to edit the metadata file.",
+  "Authors": "john@example.com",
+  "Vendor": "Yoyodyne Incorporated",
+  "Licenses": "BSD-3-Clause",
+  "Information": "https://github.com/lpar/versionize",
+  "Documentation": "https://github.com/lpar/versionize",
+  "SourceCode": "https://github.com/lpar/versionize"
+}`)
 }
 
 func loadMetadata(arg string) versionize.Metadata {
